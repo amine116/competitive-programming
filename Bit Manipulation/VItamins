@@ -1,0 +1,56 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#include<fstream>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { ll a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define MAX 1e9
+
+template<class T>inline bool read(T &x){
+    ll c=getchar();ll sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+
+
+int main(){
+    ll n = L();
+    vector<ll>c(n);
+    vector<string>s(n);
+    map<string, ll> mp;
+    mp["A"] = mp["B"] = mp["C"] = MAX;
+    mp["AB"] = mp["BC"] = mp["AC"] = MAX;
+    mp["ABC"] = MAX;
+    for (ll i = 0; i < n; i++){
+        cin >> c[i] >> s[i];
+        sort(s[i].begin(), s[i].end());
+        mp[s[i]] = min(mp[s[i]], c[i]);
+    }
+    ll ans = mp["A"] + mp["B"] + mp["C"];
+    ans = min(ans, mp["AB"] + mp["C"]);
+    ans = min(ans, mp["BC"] + mp["A"]);
+    ans = min(ans, mp["AC"] + mp["B"]);
+    ans = min(ans, mp["AB"] + mp["BC"]);
+    ans = min(ans, mp["AB"] + mp["AC"]);
+    ans = min(ans, mp["BC"] + mp["AC"]);
+    ans = min(ans, mp["ABC"]);
+    if (ans == MAX) {
+        ans = -1;
+    }
+    cout << ans << endl;
+    return 0;
+}
