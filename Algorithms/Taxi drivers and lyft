@@ -1,0 +1,78 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define rep(n) for(ll i = 0; i < n; i++)
+
+#define print1(a) (printf("%I64d ", a))
+#define print1ln(a) (printf("%I64d\n", a))
+#define print2(a, b) (printf("%I64d %I64d ", a, b))
+#define print2ln(a, b) (printf("%I64d %I64d\n", a, b))
+#define print3ln(a, b, c) (printf("%I64d %I64d %I64d\n", a, b, c))
+
+#define mod 1000000007
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'||c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0'; 
+    x*=sgn; return ~c;
+}
+using namespace std;
+int main()
+{
+
+	ll n = L(), m = L();
+	ll rsdntCoor[n+m], indicator[n+m], count[n + m];
+
+	for(ll i = 0; i<n+m; i++) rsdntCoor[i] = L();
+	for(ll i = 0; i < n + m; i++) indicator[i] = L();
+
+	memset(count, 0, sizeof(count));
+
+	vector<ll> rider;
+	//rider.clear();
+
+	ll preveousIndex = -1;
+	for(ll i = 0; i < n + m; i++)
+	{
+		if(indicator[i] == 1)
+		{
+			if(preveousIndex == -1)
+				preveousIndex = i;
+			else
+			{
+				for(ll j = 0; j < (ll)rider.size(); j++)
+				{
+					if((rsdntCoor[i] - rider[j]) <
+							 (rider[j] - rsdntCoor[preveousIndex])) count[i]++;
+					else count[preveousIndex]++;
+				}
+				rider.clear();
+				preveousIndex = i;
+			}
+		}
+		else rider.push_back(rsdntCoor[i]);
+	}
+
+	count[preveousIndex] += rider.size();
+
+	for(ll i = 0; i< n + m; i++)
+		if(indicator[i] == 1) printf("%d ", count[i]);
+
+	return 0;
+}
