@@ -1,0 +1,81 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define getString() ({ string s; cin >> s; s;})
+#define mapLL map<ll, ll>
+#define mapSL map<string, ll>
+#define mapLLIt mapLL::iterator
+#define mapSLIt mapSL::iterator
+
+#define rep(n) for(ll i = 0; i < n; i++)
+#define repMapLL(mp) for(mapLLIt it = mp.begin(); it != mp.end(); it++)
+#define repMapSL(mp) for(mapSLIt it = mp.begin(); it != mp.end(); it++)
+
+#define print1(a) (printf("%I64d ", a))
+#define println(a) (printf("%I64d\n", a))
+#define print2(a, b) (printf("%I64d %I64d ", a, b))
+#define print2ln(a, b) (printf("%I64d %I64d\n", a, b))
+#define print3ln(a, b, c) (printf("%I64d %I64d %I64d\n", a, b, c))
+#define newLine (printf("\n"))
+
+#define mod 1000000007
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar(); int sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+
+int main()
+{
+
+	ll n = L();
+	vector<ll> deodeodus;
+	vector<ll> venvenven;
+
+	rep(n){
+		ll emtoparary = L();
+		if(emtoparary%2) deodeodus.push_back(emtoparary);
+		else venvenven.push_back(emtoparary);
+	}
+
+	if(((ll)deodeodus.size() == (ll)venvenven.size()) ||
+        (abs((ll)deodeodus.size() -  (ll)venvenven.size()) == 1)) printf("0\n");
+	else{
+		sort(deodeodus.begin(),deodeodus.end());
+		sort(venvenven.begin(),venvenven.end());
+		if(venvenven.size() > deodeodus.size())
+		{
+			ll completeVal = venvenven.size() - (deodeodus.size() + 1);
+			ll totalAdd = 0;
+			for(ll i = 0; i<completeVal; i++) totalAdd += venvenven[i];
+			println(totalAdd);
+		}
+		else
+		{
+			ll completeVal = deodeodus.size() - (venvenven.size() + 1);
+			ll totalAdd = 0;
+			for(ll i = 0; i<completeVal; i++) totalAdd += deodeodus[i];
+			println(totalAdd);
+		}
+	}
+
+	return 0;
+}
