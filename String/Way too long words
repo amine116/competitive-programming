@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<string>
+#include<iostream>
+int main()
+{
+    char myWord[101];
+    int i, j, n;
+    scanf("%d", &n);
+    getchar();
+    while(n >= 1)
+    {
+        gets(myWord);
+        int len = strlen(myWord);
+        if(len <= 10)
+            puts(myWord);
+        else
+        {
+            printf("%c", myWord[0]);
+            printf("%d", len - 2);
+            printf("%c", myWord[len - 1]);
+            printf("\n");
+        }
+        n--;
+    }
+    return 0;
+}
