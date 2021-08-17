@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+int main()
+{
+    int i, j, k, n, team[4];
+    scanf("%d", &n);
+    int solveProb = 0;
+    while(n >= 1)
+    {
+        int coun = 0;
+        scanf("%d %d %d", &team[0], &team[1], &team[2]);
+        for(i = 0; i < 3; i++)
+            if(team[i] == 1)
+                coun++;
+        if(coun >= 2)
+            solveProb++;
+        n--;
+    }
+    printf("%d\n", solveProb);
+    return 0;
+}
