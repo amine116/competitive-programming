@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+#define ll long long
+ll y[100001];
+using namespace std;
+int main(){
+    ll sum1 = 0, sum2 = 0, n, m, count = 0; scanf("%I64d %I64d", &n, &m);
+    for(ll i = 0; i < n; i++){
+        ll temp1, temp2; scanf("%I64d %I64d", &temp1, &temp2); sum1 += temp1; sum2 += temp2; y[i] = temp1 - temp2;
+    }
+    if(sum2 > m){printf("-1\n"); return 0;}
+    sort(y, y + n);
+    for(ll i = n - 1; sum1 > m && i >= 0; i--){
+        sum1 -= (y[i]);
+        count++;
+    }
+    printf("%I64d\n", count);
+    return 0;
+}
