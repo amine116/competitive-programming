@@ -1,0 +1,41 @@
+#include <stdio.h>
+int main()
+{
+    int size1, size2, i, j, nOfSq;
+    scanf("%d %d", &size1, &size2);
+    if(size1 >= 1 && size2 >= 1 && size1 <= 16 && size2 <= 16 && size1 <= size2)
+    {
+        if(size1 < 2)
+        {
+            if(size2 >= 2)
+            {
+                nOfSq = size2/2;
+                printf("%d\n", nOfSq);
+            }
+            else
+                printf("0\n");
+        }
+        else if(size2 < 2)
+        {
+            if(size1 >= 2)
+            {
+                nOfSq = size1/2;
+                printf("%d\n", nOfSq);
+            }
+        }
+        else
+        {
+            if(size2 % 2 == 0)
+                nOfSq = (size2/2) * size1;
+
+            else if (size1 % 2 == 0)
+                nOfSq = (size1/2) * size2;
+
+            else
+                nOfSq = (size1 * (size2 / 2)) + (size1/2);
+
+            printf("%d\n", nOfSq);
+        }
+    }
+    return 0;
+}
