@@ -1,0 +1,15 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+    ll n, m, sum = 0; scanf("%I64d %I64d", &n, &m);
+    for(ll i = 0; i < n; i++){
+        ll t; cin >> t; sum += t;
+        if(sum < m)printf("0\n");
+        else {
+            printf("%I64d\n", sum/m);
+            sum = sum%m;
+        }
+    }
+    return 0;
+}
