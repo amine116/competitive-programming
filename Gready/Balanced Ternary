@@ -1,0 +1,112 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define getString() ({ string s; cin >> s; s;})
+#define mapLL map<ll, ll>
+#define mapSL map<string, ll>
+#define mapLLIt mapLL::iterator
+#define mapSLIt mapSL::iterator
+
+#define rep(n) for(ll i = 0; i < n; i++)
+#define repMapLL(mp) for(mapLLIt it = mp.begin(); it != mp.end(); it++)
+#define repMapSL(mp) for(mapSLIt it = mp.begin(); it != mp.end(); it++)
+
+#define prll1(a) (prllf("%I64d ", a))
+#define prll1ln(a) (prllf("%I64d\n", a))
+#define prll2(a, b) (prllf("%I64d %I64d ", a, b))
+#define prll2ln(a, b) (prllf("%I64d %I64d\n", a, b))
+#define prll3ln(a, b, c) (prllf("%I64d %I64d %I64d\n", a, b, c))
+#define newLine (prllf("\n"))
+
+#define mod 1000000007
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar(); int sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+
+int main(){
+
+    ll n = L();
+	string STRING = getString();
+	ll Requested = n/3;
+
+	ll noMeansNo[3];
+	memset(noMeansNo,0,sizeof(noMeansNo));
+
+	for(ll i = 0; i<n; i++){noMeansNo[(ll)STRING[i]-'0']++;}
+
+	ll arr[3];
+	for(ll i = 0; i<3; i++)
+        arr[i] = Requested - noMeansNo[i];
+
+	if(arr[0] > 0){
+		for(ll i = 0; i<n; i++){
+			ll temp = STRING[i]-'0';
+			if(noMeansNo[temp]>Requested){
+				noMeansNo[temp]--;
+				STRING[i] = '0';
+				arr[0]--;
+			}
+			if(arr[0] == 0) break;
+		}
+	}
+
+	if(arr[1] > 0){
+		for(ll i = 0; i<n; i++){
+			ll temp = STRING[i]-'0';
+			if(temp == 2 && noMeansNo[temp] > Requested){
+				noMeansNo[temp]--;
+				STRING[i] = '1';
+				arr[1]--;
+			}
+			if(arr[1] == 0)break;
+		}
+	}
+
+	if(arr[2] > 0){
+		for(ll i = n-1; i>-1; i--){
+			ll temp = STRING[i]-'0';
+			if(noMeansNo[temp]>Requested){
+				noMeansNo[temp]--;
+				STRING[i] = '2';
+				arr[2]--;
+			}
+			if(arr[2] == 0) break;
+		}
+	}
+
+	if(arr[1] > 0){
+		for(ll i = n-1; i>-1; i--){
+			ll temp = STRING[i]-'0';
+			if(temp == 0 && noMeansNo[temp] > Requested){
+				noMeansNo[temp]--;
+				STRING[i] = '1';
+				arr[1]--;
+			}
+			if(arr[1] == 0) break;
+		}
+	}
+
+	cout << STRING << endl;
+
+	return 0;
+}
