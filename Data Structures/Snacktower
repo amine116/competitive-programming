@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+    ll n; cin >> n; ll snakes[n + 1]; map <ll, ll> indexOfSnakes;
+    for(ll i = 0; i < n; i++){
+        cin >> snakes[i]; indexOfSnakes[snakes[i]] = i;
+    }
+    sort(snakes, snakes + n); ll newLinePrint = 0;
+    if(indexOfSnakes[snakes[n - 1]] > 0){
+        for(ll i = 0; i < indexOfSnakes[snakes[n - 1]]; i++){ cout<<"\n"; newLinePrint++;}
+    }
+    cout << snakes[n - 1] << " ";
+    for(ll i = n - 2; i >= 0; ){
+        if(indexOfSnakes[snakes[i]] > indexOfSnakes[snakes[i + 1]]){
+            for(ll j = newLinePrint; j < indexOfSnakes[snakes[i]]; j++){
+                printf("\n"); newLinePrint++;
+            }
+            cout << snakes[i] << " "; i--;
+        }
+        else {
+            cout << snakes[i]<< " "; i--;
+        }
+    }
+    return 0;
+}
