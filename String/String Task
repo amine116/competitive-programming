@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<string>
+#include<bits/stdc++.h>
+#include<iostream>
+int main()
+{
+    char myString[101];
+    int i, j;
+    gets(myString);
+    int len = strlen(myString);
+    for(i = 0; i < len; )
+    {
+        if(myString[i] >= 'A' && myString[i] <= 'Z')
+        {
+            if(myString[i] != 'A' && myString[i] != 'E' && myString[i] != 'I' && myString[i] != 'O' && myString[i] != 'U' && myString[i] != 'Y')
+            {
+                printf(".%c", myString[i] + 32);
+                i++;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        else if(myString[i] >= 'a' && myString[i] <= 'z')
+        {
+            if(myString[i] != 'a' && myString[i] != 'e' && myString[i] != 'i' && myString[i] != 'o' && myString[i] != 'u' && myString[i] != 'y')
+            {
+                printf(".%c", myString[i]);
+                i++;
+            }
+            else
+            {
+                i++;
+            }
+        }
+    }
+    return 0;
+}
