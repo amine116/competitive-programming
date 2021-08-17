@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+    ll n, k, s; scanf("%I64d %I64d %I64d", &n, &k, &s);
+    if(s < k || (n - 1)*k < s){
+        printf("NO\n");
+        return 0;
+    }
+    printf("YES\n");
+    ll nextHouse = 1;
+    while(k--){
+        ll CanStep = min(n - 1, s - k);
+        s -= CanStep;
+        if(nextHouse + CanStep <= n) nextHouse += CanStep;
+        else nextHouse -= CanStep;
+        printf("%I64d ", nextHouse);
+    }
+    printf("\n");
+    return 0;
+}
