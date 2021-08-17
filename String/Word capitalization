@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main()
+{
+    char cha[1001];
+    gets(cha);
+    if(cha[0] >= 'a' && cha[0] <= 'z')
+        cha[0] = cha[0] - 32;
+    puts(cha);
+    return 0;
+}
