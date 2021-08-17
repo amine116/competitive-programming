@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+#define ll long long
+using  namespace std;
+int main(){
+    ll n, t, c, count = 0, ind = 0; cin >> n >> t >> c; ll grtrIndex[200001] = {};
+    for(ll i = 0, loop = 0; i < n; i++){
+        ll temp; cin >> temp;
+        if(temp > t) grtrIndex[ind++] = i;
+    }
+    ll initial = 0;
+    if(ind == 0 && n >= 1) count = n - c + 1;
+    else{
+        for(ll i = 0; i < ind; i++){
+            if(grtrIndex[i] - initial >= c) count += grtrIndex[i] - initial - c + 1;
+            ///cout<<initial<<" "<<grtrIndex[i]<<" "<<count<<endl;
+            initial = grtrIndex[i] + 1;
+        }
+        initial = grtrIndex[ind - 1] + 1;
+        if(initial < n){
+            initial = grtrIndex[ind - 1] + 1;
+            if(n - initial >= c) count += n - initial - c + 1;
+            ///cout<<initial<<" "<<n<<" "<<count<<endl;
+        }
+    }
+    printf("%I64d\n", count);
+    return 0;
+}
+/*
+10 4 3
+1 2 3 4 5 6 3 5 2 3
+*/
