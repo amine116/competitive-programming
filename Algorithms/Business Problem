@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, m; scanf("%d", &n);
+    long long sum = 0;
+    map<int, int>product;
+    for(int i = 0; i < n; i++){
+        int a, b;
+        scanf("%d %d", &a, &b);
+        product[a] = b;
+        sum += b;
+    }
+    scanf("%d", &m);
+    for(int i = 0; i < m; i++){
+        int a, b;
+        scanf("%d %d", &a, &b);
+        if(product[a] < b){
+            sum += b;
+            sum -= product[a];
+        }
+    }
+    printf("%I64d\n", sum);
+    return 0;
+}
