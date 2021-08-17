@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+ll numOfPair(ll val){ return val*(val - 1)/2; }
+int main(){
+    ll n, m; cin >> n >> m;
+    ll min, max;
+    ll uniformlyMin = n/m, leftOvers = n%m;
+    min = (numOfPair(uniformlyMin)*m) + (numOfPair(uniformlyMin + 1)*leftOvers) - (numOfPair(uniformlyMin)*leftOvers);
+    max = numOfPair(n - m + 1);
+    cout << min << " " << max << endl;
+    return 0;
+}
