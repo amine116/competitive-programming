@@ -1,0 +1,190 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define rep(n) for(ll i = 0; i < n; i++)
+
+#define print1(a) (printf("%I64d ", a))
+#define print1ln(a) (printf("%I64d\n", a))
+#define print2(a, b) (printf("%I64d %I64d ", a, b))
+#define print2ln(a, b) (printf("%I64d %I64d\n", a, b))
+#define print3ln(a, b, c) (printf("%I64d %I64d %I64d\n", a, b, c))
+
+#define newLine (printf("\n"))
+#define prnt1(a) (printf("%lld ", a))
+#define prnt1ln(a) (printf("%lld\n", a))
+#define prnt2(a, b) (printf("%lld %lld ", a, b))
+#define prnt2ln(a, b) (printf("%lld %lld\n", a, b))
+#define prnt3ln(a, b, c) (printf("%lld %lld %lld\n", a, b, c))
+
+#define mod 1000000007
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'||c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0'; 
+    x*=sgn; return ~c;
+}
+using namespace std;
+int main(){	
+	ll n = L(), q = L(), k = L(), numOfOnes = 0; vector<ll> zeroOnes;
+	//Inputs
+	for(ll i = 0; i < n; i++){
+		ll temp = L();
+		if(temp == 1) numOfOnes++;
+		zeroOnes.push_back(temp);
+	}
+	string quarry; cin >> quarry;
+	ll max1 = 0, max1L = -1, max1R = -1, max2 = 0, max2L = -1, 
+			max2R = -1, firstOneL = -1, firstOneR = -1, firstOnes, lastOnes, lastOnesL = -1,
+			lastOnesR = -1;
+	bool isAllOnes = false, isCircular, max1Circ = false, 
+			max2Circ = false, lastOneCirc = false, isAllZero = false;
+	if(numOfOnes == n) isAllOnes = true;
+	if(numOfOnes == 0) isAllZero = true;
+	//Finding first Max
+	for(ll i = 0; i < n; ){
+		ll count = 0;
+		if(zeroOnes[i] == 1){
+			ll j = i;
+			while(zeroOnes[j] == 1 && j < n) j++, count++;
+			if(max1 <= count){
+				max1 = count;
+				max1L = i;
+				max1R = j - 1;
+			}
+			i = j;
+		}
+		else i++;
+	}
+	//Finding second Max
+	for(ll i = 0; i < n; ){
+		if(zeroOnes[i] == 1 && (i < max1L || i > max1R)){
+			ll j = i, count = 0;
+			while(zeroOnes[j] == 1 && j < n) j++, count++;
+			if(max2 <= count){
+				max2 = count;
+				max2L = i;
+				max2R = j - 1;
+			}
+			i = j;
+		}
+		else i++;
+	}
+	//Finding firstOnes
+	if(zeroOnes[n - 1] == 1 && zeroOnes[0] == 1) isCircular = true;
+	if(isCircular){
+		if(max1R == n - 1) max1Circ = true;
+		if(max2R == n - 1) max2Circ = true;
+		ll i = 0;
+		while(zeroOnes[i] == 1 && i < n) i++;
+		firstOnes = i;
+		firstOneR = i - 1;
+		firstOneL = i == 0? -1LL:0;
+
+		if(!max1Circ && !max2Circ){
+			lastOneCirc = true;
+			ll k = n - 1, count = 0; while(zeroOnes[k] == 1 && k >= 0) k--, count++; 
+			lastOnes = count;
+			lastOnesL = k == n - 1? -1:k + 1;
+			lastOnesR = k == n - 1? -1:n - 1;
+		}
+	}
+	//prnt2ln(max1, max2);
+	//prnt2ln(max1L, max1R);
+	//prnt2ln(max2L, max2R);
+	//prnt2ln(firstOneL, firstOneR);
+	//prnt2ln(lastOnesL, lastOnesR);
+	//newLine;newLine;
+	//Quarries
+	for(ll i = 0; i < q; i++){
+		if(quarry[i] == '!'){
+			max1L = (++max1L)%n;
+			max1R = (++max1R)%n;
+			max2L = (++max2L)%n;
+			max2R = (++max2R)%n;
+			firstOneL = firstOneL == -1? :(++firstOneL)%n;
+			firstOneR = firstOneR == -1? :(++firstOneR)%n;
+			lastOnesL = lastOnesL == -1? :(++lastOnesL)%n;
+			lastOnesR = lastOnesR == -1? :(++lastOnesR)%n;
+		}
+		else if(quarry[i] == '?'){
+			if(isAllZero) printf("0\n");
+			else if(isAllOnes) printf("%lld\n", numOfOnes <= k? numOfOnes:k);
+			else{
+				if(max1L <= max1R){
+					ll res;
+					if(max2L <= max2R){
+						if(max2Circ) res = max(max1, max2 + 
+							(max2R + 1 == firstOneL? 
+								firstOneR < firstOneL? (n - firstOneL):firstOnes:0));
+						else res = max1;
+					}
+					else if(max2R < max2L){
+						ll rTemp = n - max2L, lTemp = max2R + 1;
+						if(max2Circ) res = max(max1, lTemp + 
+							(max2R + 1 == firstOneL? 
+								(firstOneR < firstOneL? (n - firstOneL):firstOnes):0));
+						else res = max1;
+					}
+					if(max1Circ) res = max1 + (max1R + 1 == firstOneL? 
+							firstOneR < firstOneL? (n - firstOneL):firstOnes:0);
+					else res = max(max1, res);
+					if(lastOneCirc){
+						ll lastRes = (lastOnesR < lastOnesL? lastOnesR + 1 + 
+							(firstOneR < firstOneL? n - firstOneL:firstOnes):
+								(lastOnesR + 1 == firstOneL? lastOnes + 
+									(firstOneR < firstOneL? (n - firstOneL):firstOnes):0));
+						res = max(res, lastRes);
+						//cout << "\t" << lastRes << endl;
+					}
+					//newLine;
+					//prnt2ln(max1L, max1R);
+					//prnt2ln(max2L, max2R);
+					//prnt2ln(firstOneL, firstOneR);
+					printf("%lld\n", res <= k? res:k);
+				}
+				else{
+					ll rTemp = n - max1L, lTemp = max1R + 1, res, mx2Res;
+					if(max2Circ) mx2Res = max2 + (max2R + 1 == firstOneL?
+							(firstOneR < firstOneL? (n - firstOneL):firstOnes):0);
+					else mx2Res = max2;
+
+					if(max1Circ) lTemp += (max1R + 1 == firstOneL? 
+							(firstOneR < firstOneL? (n - firstOneL):firstOnes):0);
+					
+					res = max(mx2Res, max(lTemp, rTemp));
+					if(lastOneCirc){
+						ll lastRes = (lastOnesR < lastOnesL? lastOnesR + 1 + 
+							(firstOneR < firstOneL? n - firstOneL:firstOnes):
+								(lastOnesR + 1 == firstOneL? lastOnes + 
+									(firstOneR < firstOneL? (n - firstOneL):firstOnes):0));
+						res = max(res, lastRes);
+						//cout << "\t" << lastRes << endl;
+					}
+					//newLine;
+					//prnt2ln(max1L, max1R);
+					//prnt2ln(max2L, max2R);
+					//prnt2ln(firstOneL, firstOneR);
+					printf("%lld\n", res <= k? res:k);
+				}
+
+			}
+		}
+	}
+	return 0;
+}
