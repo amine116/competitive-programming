@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull long long
+using namespace std;
+int main(){
+    ll n; cin >> n;
+    set<ll>arr; for(ll i = 0; i < n; i++) {int t; cin >> t; arr.insert(t);}
+    set<ll>::iterator it, it2;
+    ll count = 0;
+    for(it = arr.begin(); it != arr.end(); it++){
+        it2 = it; it2++;
+        while(abs(*it2 - *it) == 1 && it2 != arr.end()){
+            count++; it++; it2++;
+        }
+        if(count >= 2) {cout << "YES\n"; return 0;}
+        count = 0;
+    }
+    cout << "NO\n";
+    return 0;
+}
