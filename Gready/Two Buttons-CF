@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, m, i;
+    unsigned long long coun = 0;
+    scanf("%d %d", &n, &m);
+
+    while(n < m)
+    {
+        if(m%2 != 0) m++;
+        else m = m/2;
+        coun++;
+    }
+    coun = coun + n - m;
+
+    printf("%I64d\n", coun);
+    return 0;
+}
