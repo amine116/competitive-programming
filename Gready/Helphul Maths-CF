@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+int main()
+{
+    vector<int>num;
+    int temp;
+    for(int i = 0; ; i++)
+    {
+        scanf("%d", &temp);
+        num.push_back(temp);
+        char a = getchar();
+        if(a == '\n')
+            break;
+
+    }
+    int lenNum = num.size();
+    for(int i = 0; i < lenNum - 1; i++)
+        for(int j = i + 1; j < lenNum; j++)
+            if(num[i] > num[j])
+            {
+                int temp = num[i];
+                num[i] = num[j];
+                num[j] = temp;
+            }
+
+
+    for(int i = 0; i < lenNum; i++){
+        if(i == lenNum - 1)
+            printf("%d\n", num[i]);
+        else
+            printf("%d+", num[i]);
+    }
+    return 0;
+}
