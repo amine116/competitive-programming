@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+string makeString(int n){
+    stringstream ss;
+    ss << n;
+    string s = ss.str();
+    return s;
+}
+int main(){
+    map <string, int> mp; int n; scanf("%d", &n);
+    for(int i = 0; i < n; i++){
+        string temp; cin >> temp; mp[temp]++;
+        if(mp[temp] == 1) printf("OK\n");
+        else {
+            temp += makeString(mp[temp] - 1);
+            cout << temp << endl;
+            mp[temp]++;
+        }
+    }
+    return 0;
+}
