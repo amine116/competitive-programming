@@ -1,0 +1,57 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#include<fstream>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+int main(){
+    ll n = L(), r = L(); ll arr[n + 1]; for(ll i = 0; i < n; i++) arr[i] = L();
+
+    ll numOfHeaterNeeded = 0, filled = 0, i, previous = -1; 
+    for(i = 0; i < n; ){
+        ll curHeater = -1, j; 
+        ll requiredPos = min(n - 1, i + r - 1);
+        while(requiredPos > previous && arr[requiredPos] == 0) requiredPos--;
+        if(requiredPos == previous){
+            printf("-1\n");
+            return 0;
+        }
+        previous = requiredPos;
+        i = requiredPos + r;
+
+        numOfHeaterNeeded++;
+    }
+    printf("%I64d\n", numOfHeaterNeeded);
+    
+
+    return 0;
+}
+/*
+ll arr[121] = {
+        1,0,0,0, 1,0,0,
+0 ,0, 1, 1 ,0 ,1 ,1, 0, 0, 0, 0 ,1 ,1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,
+0, 1, 1, 1, 1, 0, 1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1 ,1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+ 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1};
+    
+*/
