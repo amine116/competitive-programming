@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+#include<string>
+int main()
+{
+    char players[101];
+    int i, j, coun0 = 0, coun1 = 0;
+    gets(players);
+    int len = strlen(players);
+    for(i = 0; i < len; i++)
+    {
+        if(coun1 >= 7)
+            break;
+        if(coun0 >= 7)
+            break;
+        if(players[i] != '0')
+        {
+            coun0 = 0;
+            coun1++;
+        }
+        else if(players[i] != '1')
+        {
+            coun1 = 0;
+            coun0++;
+        }
+    }
+    if(coun1 >= 7 || coun0 >= 7)
+        printf("YES\n");
+    else
+        printf("NO\n");
+    return 0;
+}
