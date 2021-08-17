@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+    map <string, string> comp, req, reqF, reqS, inv; map <string, string>::iterator it;
+    int q; scanf("%d", &q); int count = 0;
+    while(q--){
+        string s1, s2; cin >> s1 >> s2;
+        bool f = false;
+        for(it = comp.begin(); it != comp.end(); it++){
+            if(s1 == it->second){f = true; break;}
+        }
+        if(f) comp[it->first] = s2;
+        else comp[s1] = s2;
+    }
+    cout << comp.size() << endl;
+    for(it = comp.begin(); it != comp.end(); it++)cout << it->first << " " << it->second << endl;
+    return 0;
+}
