@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+using namespace std;
+int main(){
+    ll l, r; cin >> l >> r;
+    cout << "YES\n";
+    ll i = l;
+    while(i < r){
+        cout << i << " " << i + 1 << endl;
+        i += 2;
+    }
+    return 0;
+}
