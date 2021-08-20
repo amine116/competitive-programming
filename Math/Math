@@ -1,0 +1,111 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define rep(n) for(ll i = 0; i < n; i++)
+
+#define print1(a) (printf("%I64d ", a))
+#define print1ln(a) (printf("%I64d\n", a))
+#define print2(a, b) (printf("%I64d %I64d ", a, b))
+#define print2ln(a, b) (printf("%I64d %I64d\n", a, b))
+#define print3ln(a, b, c) (printf("%I64d %I64d %I64d\n", a, b, c))
+
+
+#define mod 1000000007
+#define MX 10000007
+
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'||c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+vector<ll> allPrimesNumber;
+bool isPrime[MX];
+
+void setSiveForallPrimesNumber()
+{
+	for(ll i = 2; i<MX; i++)
+	{
+		if(!isPrime[i])
+		{
+			allPrimesNumber.push_back(i);
+			for(ll j = i*i; j<MX; j+=i) isPrime[j] = true;
+		}
+	}
+	return ;
+}
+
+bool isEqual = false;
+
+int posFuck(int n)
+{
+	int temp = 2;
+	for(int i = 1; ;temp *= 2,i++)
+	{
+		if(temp == n) return i;
+		else if(temp > n)
+		{
+			isEqual = true;
+			return i;
+		}
+	}
+}
+
+int main()
+{
+	setSiveForallPrimesNumber();
+	ll n = L();
+	ll ch = n;
+	map<ll,ll> MP;
+	for(ll i = 0; allPrimesNumber[i] <= n; i++)
+	{
+		while(n%allPrimesNumber[i] == 0)
+		{
+			MP[allPrimesNumber[i]]++;
+			n /= allPrimesNumber[i];
+		}
+	}
+
+	map<ll,ll> :: iterator it;
+	ll mx = 0;
+	ll temp = 1;
+
+	for(it = MP.begin(); it != MP.end(); it++)
+	{
+		mx = max(mx,it->second);
+		temp *= (it->first);
+	}
+
+	for(it = MP.begin(); it != MP.end(); it++)
+	{
+		if(mx != it->second)
+		{
+			isEqual = true;
+			break;
+		}
+	}
+
+	ll res = posFuck(mx);
+
+	if(temp == ch)
+		printf("%I64d 0\n",temp);
+	else
+		printf("%I64d %I64d\n",temp,res+(isEqual));
+
+	return 0;
+}
