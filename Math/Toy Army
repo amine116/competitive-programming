@@ -1,0 +1,14 @@
+#include<stdio.h>
+int main()
+{
+    int n, i, count = 0;
+    scanf("%d", &n);
+    int total = 2*n;
+
+    count = n + (n/2);
+    printf("%d\n", count);
+
+
+    return 0;
+
+}
