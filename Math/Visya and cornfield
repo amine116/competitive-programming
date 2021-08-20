@@ -1,0 +1,53 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define MAX 999999999
+using namespace std;
+ll getAreaOfThePolygon(ll x1, ll y1, ll x2, ll y2, ll x3, ll y3)
+{
+    ll first = (x1*y2+x2*y3+x3*y1);
+    ll second = (y1*x2+y2*x3+y3*x1);
+	return first - second;
+}
+
+int main()
+{
+
+	ll n, d; cin >> n >> d;
+
+	ll edgex1 = d;
+	ll edgey1 = 0;
+	ll edgex2 = n;
+	ll edgey2 = n-d;
+	ll edgex3 = n-d;
+	ll edgey3 = n;
+	ll edgex4 = 0;
+	ll edgey4 = d;
+
+	ll m; cin >> m;
+	while(m--)
+	{
+		ll x, y; cin >> x >> y;
+
+		ll first = getAreaOfThePolygon(edgex1, edgey1, edgex4, edgey4, x, y);
+		ll second = getAreaOfThePolygon(edgex2, edgey2, edgex3, edgey3, x, y);
+		ll third = getAreaOfThePolygon(edgex1, edgey1, edgex2, edgey2, x, y);
+		ll fourth = getAreaOfThePolygon(edgex4, edgey4, edgex3, edgey3, x, y);
+
+		if((first<=0 && second>=0) && (fourth<=0 && third >= 0)) printf("YES\n");
+		else printf("NO\n");
+
+	}
+
+
+	return 0;
+}
