@@ -1,0 +1,38 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#include<fstream>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define MAX 300005
+
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+ll powerOfTwo[31] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192,
+        16384, 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216,
+        33554432, 67108864, 134217728, 268435456, 536870912, 1073741824};
+
+int main(){
+    ll n = L(), ans = 0;
+    for(ll i = 0; powerOfTwo[i] <= n; i++) ans += 1;
+    cout << ans << endl;
+
+    return 0;
+}
