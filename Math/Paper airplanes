@@ -1,0 +1,13 @@
+#include<stdio.h>
+int main()
+{
+    int k, n, s, p, i, totalPlane, totalSheets, totalPacks;
+    scanf("%d %d %d %d", &k, &n, &s, &p);
+
+    int oneNeedSheets = ceil((double)n/ (double)s);
+    totalSheets = ceil((double)oneNeedSheets*(double)k);
+    totalPacks = ceil((double)totalSheets/(double)p);
+
+    printf("%d\n", totalPacks);
+    return 0;
+}
