@@ -1,0 +1,112 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define I() ( { int a ; read(a) ; a; } )
+#define L() ( { ll a ; read(a) ; a; } )
+#define D() ({double a; scanf("%lf", &a); a;})
+#define UL() ( { ull a; read(a); a; } )
+#define SL() ( { sll a; read(a); a; } )
+#define getString() ({ string s; cin >> s; s;})
+#define mapLL map<ll, ll>
+#define mapSL map<string, ll>
+#define mapLLIt mapLL::iterator
+#define mapSLIt mapSL::iterator
+ 
+#define rep(n) for(ll i = 0; i < n; i++)
+#define repMapLL(mp) for(mapLLIt it = mp.begin(); it != mp.end(); it++)
+#define repMapSL(mp) for(mapSLIt it = mp.begin(); it != mp.end(); it++)
+ 
+#define print1(a) (printf("%I64d ", a))
+#define print1ln(a) (printf("%I64d\n", a))
+#define print2(a, b) (printf("%I64d %I64d ", a, b))
+#define print2ln(a, b) (printf("%I64d %I64d\n", a, b))
+#define print3ln(a, b, c) (printf("%I64d %I64d %I64d\n", a, b, c))
+#define newLine (printf("\n"))
+ 
+#define prnt1(a) (printf("%lld ", a))
+#define prnt1ln(a) (printf("%lld\n", a))
+#define prnt2(a, b) (printf("%lld %lld ", a, b))
+#define prnt2ln(a, b) (printf("%lld %lld\n", a, b))
+#define prnt3ln(a, b, c) (printf("%lld %lld %lld\n", a, b, c))
+ 
+#define mod 1000000007
+#define MAX 10005
+ 
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'|c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+using namespace std;
+ 
+ll getPower(ll x, ll p){
+    ll power = x;
+    if(x == 0) return 0;
+    if(p == 0) return 1;
+ 
+    for(ll i = 2; i <= p; i++){
+        power *= x;
+    }
+    return power;
+ 
+}
+///---------------------endOfSnippet----------------|o|
+bitset<MAX + 5> notPrime;
+ll spf[MAX + 5];
+ll preCalcltd[MAX + 5];
+ll prime[30];
+void seive(){
+    notPrime[0] = 1;
+    notPrime[1] = 1;
+    for(ll i = 2; i <= MAX; i++){
+        if(notPrime[i] == 0){
+            for(ll j = i + i; j <= MAX; j += i){
+                notPrime[j] = 1;
+                if(spf[j] == 0) spf[j] = i;
+            }
+            if(spf[i] == 0) spf[i] = i;
+        }
+    }
+}
+ll factorize(ll n){
+    ll prev = spf[n], c = 0;
+    ll phi = 1, tempN = n;
+    while(n != 1){
+        prime[c] = spf[n];
+        n /= spf[n];
+        if(prev != spf[n]) prev = spf[n], c++;
+    }
+    rep(c){
+        phi = (tempN - (tempN/prime[i]));
+        tempN = phi;
+    }
+    return phi;
+}
+void preCalc(){
+    for(ll i = 1; i <= MAX; i++) preCalcltd[i] = factorize(i);
+}
+int main(){
+    seive();
+    ///cout << factorize(18L) << endl;
+    preCalc();
+    ll t = L();
+    while(t--){
+        ll n = L(), h = 0;
+        for(ll i = 1; i <= n; i++){
+            h += preCalcltd[i];
+        }
+        h *= h;
+        prnt1ln(h);
+    }
+    return 0;
+}
