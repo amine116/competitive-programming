@@ -1,0 +1,33 @@
+/*
+    Author: Aminul Islam.
+    Email: iaminul237@gmail.com
+    Facebook: www.facebook.com/aminul.islam116
+    Department: mathematics
+    Institution: Shahjalal university of science and technology, Sylhet.
+    Bangladesh.
+*/
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+#define sll signed long long
+#define MAX 100001
+
+using namespace std;
+int main(){
+    ll n, k, m; cin >> n >> k >> m;
+    vector<ll>v[1000001];
+    for(ll i = 0; i < n; i++){
+        ll temp; cin >> temp;
+        v[temp%m].push_back(temp);
+    }
+
+    for(ll i = 0; i < m; i++){
+        if(v[i].size() >= k){
+            cout << "Yes\n";
+            for(ll j = 0; j < k; j++) cout << v[i][j] << " "; cout << endl;
+            return 0;
+        }
+    }
+    cout << "No\n";
+    return 0;
+}
