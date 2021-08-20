@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+#define ll long long
+#define ull unsigned long long
+using namespace std;
+int main(){
+    ull a, b, x, y; cin >> a >> b >> x >> y;
+    ull g = __gcd(x, y); x /= g; y /= g;
+    //cout << x << " " << y << endl;
+    ll count = 0;
+    /*
+    ll newX = x, newY = y;
+    while(newX <= a && newY <= b){
+        count++;
+        newX += x; newY += y;
+    }
+    */
+    count = min(a/x, b/y);
+    cout << count << endl;
+    //main();
+    return 0;
+}
