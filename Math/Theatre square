@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    long long n, m, a, coun = 0;
+    scanf("%I64d %I64d %I64d", &n, &m, &a);
+
+    if(n <= a && m <= a)
+        coun++;
+    else if(n <= a)
+    {
+        if(m % a == 0)
+            coun = (m / a);
+        else
+            coun = (m / a) + 1;
+    }
+    else if(m <= a)
+    {
+        if(n % a == 0)
+            coun = (n / a);
+        else
+            coun = (n / a) + 1;
+    }
+    else
+    {
+        if(m % a == 0 && n % a == 0)
+            coun = (m / a) * (n / a);
+        else if(m % a == 0)
+            coun = (m / a) * ((n / a) + 1);
+        else if(n % a == 0)
+            coun = (n / a) * ((m / a) + 1);
+        else
+            coun = ((n / a) + 1) * ((m / a) + 1);
+    }
+    printf("%I64d\n", coun);
+    return 0;
+}
