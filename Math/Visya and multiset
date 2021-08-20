@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+
+#define D(x) cout<< #x <<" = "<<x<<"\n"
+#define IL(a,n) for (int i=a; i<n; i++)
+#define II() ( { int a ; read(a) ; a; } )
+#define LL() ( { Long a ; read(a) ; a; } )
+#define DD() ({double a; scanf("%lf", &a); a;})
+
+using namespace std;
+
+//Fast Reader
+template<class T>inline bool read(T &x){
+    int c=getchar();int sgn=1;
+    while(~c&&c<'0'||c>'9'){if(c=='-')sgn=-1;c=getchar();}
+    for(x=0;~c&&'0'<=c&&c<='9';c=getchar())x=x*10+c-'0';
+    x*=sgn; return ~c;
+}
+
+typedef long long Long;
+typedef vector<int> VI;
+typedef vector<VI> VVI;
+
+const int INF=2e9;
+const int MX=105;
+const int MOD=1000000007;
+const double PI=acos(-1.0);
+
+/*_____________________________________________*/
+
+
+int main()
+{
+
+	int n = II();
+	int arr[n];
+	int decideFuck[MX];
+	memset(decideFuck,0,sizeof(decideFuck));
+
+	for(int i = 0; i < n; i++) arr[i] = II(), decideFuck[arr[i]]++;
+
+	int really = 0, poss = 0;
+
+	for(int i = 0; i<MX; i++)
+	{
+		if(decideFuck[i] == 1) really++;
+		else if(decideFuck[i] > 2) poss++;
+	}
+
+	if(really%2 == 1 && poss == 0)
+	{
+		printf("NO\n");
+		return 0;
+	}
+
+	printf("YES\n");
+
+	if(really == 0)
+	{
+		for(int i = 0; i<n; i++) printf("A");
+		return 0;
+	}
+
+	int givenSomething = really/2;
+	set<int> thisIsMult;
+
+	for(int i = 0; i<MX; i++)
+	{
+		if(decideFuck[i] == 1 && givenSomething)
+		{
+			thisIsMult.insert(i);
+			givenSomething--;
+		}
+	}
+
+	if(really%2 == 1)
+	{
+		for(int i = 0; i<MX; i++)
+		{
+			if(decideFuck[i] > 2)
+			{
+				thisIsMult.insert(i);
+				break;
+			}
+		}
+	}
+
+	for(int i = 0; i<n; i++)
+	{
+		if(thisIsMult.find(arr[i])!=thisIsMult.end())
+		{
+			printf("A");
+			thisIsMult.erase(arr[i]);
+		}
+		else printf("B");
+	}
+
+	return 0;
+}
